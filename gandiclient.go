@@ -48,7 +48,7 @@ func (c *GandiClient) doRequest(req *http.Request, readResponseBody bool) (int, 
 		fmt.Printf("Request: %q\n", dump)
 	}
 
-	req.Header.Set("Authorization", fmt.Sprintf("Apikey %s", c.apiKey))
+	req.Header.Set("Authorization", fmt.Sprintf("Bearer %s", c.apiKey))
 	client := http.Client{
 		Timeout: 30 * time.Second,
 	}

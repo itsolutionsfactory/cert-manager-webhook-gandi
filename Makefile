@@ -9,8 +9,8 @@ endif
 
 GO_VERSION ?= $(shell go mod edit -json | grep -${GREP_PREGEX_FLAG}o '"Go":\s+"([0-9.]+)"' | sed -E 's/.+"([0-9.]+)"/\1/')
 
-IMAGE_NAME := bwolf/cert-manager-webhook-gandi
-IMAGE_TAG := 0.2.0
+IMAGE_NAME := itsolutionsfactory/cert-manager-webhook-gandi
+IMAGE_TAG := 0.3.0
 
 OUT := $(shell pwd)/_out
 
@@ -38,7 +38,7 @@ clean-kubebuilder:
 	rm -Rf _test/kubebuilder
 
 build:
-	docker buildx build --target=image --platform=linux/amd64 --output=type=docker,name=${IMAGE_NAME}:${IMAGE_TAG} --tag=${IMAGE_NAME}:latest --build-arg=GO_VERSION=${GO_VERSION} .
+	docker buildx build --target=image --platform=linux/amd64 --output=type=docker,name=${IMAGE_NAME}:${IMAGE_TAG} --tag=${IMAGE_NAME}:latest --tag=${IMAGE_NAME}:${IMAGE_TAG} --build-arg=GO_VERSION=${GO_VERSION} .
 
 package:
 	helm package deploy/cert-manager-webhook-gandi -d charts/
